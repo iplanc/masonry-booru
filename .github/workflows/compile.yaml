@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "20.x"
-      - run: npm ci
+      - run: npm i
 
   compile_srcs:
     needs: install_deps
@@ -20,6 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+      - name: fixes lint errors
+        run: npm run lint
       - name: compile source codes
         run: npm run build
 
@@ -38,13 +40,5 @@ jobs:
         run: apt install git -y
       - name: config git
         run: git config --global user.name 'PlanC14' && git config --global user.email 'planc2333@outlook.com'
-      - name: checkout branches
-        run: git checkout pages
-      - name: remove other files
-        run: rm -rf !(dist)
-      - name: move files in dist
-        run: mv dist/* ./
-      - name: remove dist folder
-        run: rmdir dist
       - name: push to pages branch
-        run: git push
+        run: git subtree push --prefix dist origin gh-pages
