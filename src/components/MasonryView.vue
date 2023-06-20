@@ -1,6 +1,6 @@
 <template>
   <h1>搜索结果 共 {{ count }} 个</h1>
-  <div class="masnory" v-infinite-scroll="load">
+  <div class="masonry" v-infinite-scroll="load">
     <div class="item-view" v-for="each in posts" v-bind:key="each">
       <ItemView
         :url="each.file_url"
@@ -16,7 +16,7 @@ import ItemView from "@/components/ItemView.vue";
 import axios from "axios";
 
 export default {
-  name: "MasnoryView",
+  name: "masonryView",
   props: {
     tags: String,
   },
@@ -34,7 +34,7 @@ export default {
     getImageList(tags, pid = 0) {
       axios({
         method: "GET",
-        url: "/index.php?page=dapi&s=post&q=index&limit=15&json=1",
+        url: "/api/index.php?page=dapi&s=post&q=index&limit=15&json=1",
         crossDomain: true,
         params: {
           tags: tags,
@@ -64,12 +64,12 @@ export default {
 </script>
 
 <style scoped>
-.masnory {
+.masonry {
   column-count: 4;
   column-gap: 10px;
 }
 
-.masnory .item-view {
+.masonry .item-view {
   /*width: calc(100% / 4 - 20px);*/
   margin-bottom: 10px;
   break-inside: avoid;

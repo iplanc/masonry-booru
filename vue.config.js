@@ -1,6 +1,16 @@
 module.exports = {
   publicPath: "",
   devServer: {
-    proxy: "https://gelbooru.com/",
+    proxy: {
+      "/api": {
+        target: "https://gelbooru.com/",
+        secure: true,
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          "^/api": "/",
+        },
+      },
+    },
   },
 };

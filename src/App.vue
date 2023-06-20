@@ -6,16 +6,16 @@
       </el-button>
     </template>
   </el-input>
-  <MasnoryView :tags="tags" />
+  <masonryView :tags="tags" />
 </template>
 
 <script>
-import MasnoryView from "./components/MasnoryView.vue";
+import masonryView from "./components/MasonryView.vue";
 
 export default {
   name: "App",
   components: {
-    MasnoryView,
+    masonryView,
   },
   data: function () {
     return {
