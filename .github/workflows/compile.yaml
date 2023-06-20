@@ -20,6 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+      - name: install vue
+        run: npm i @vue/cli -g
       - name: fixes lint errors
         run: npm run lint
       - name: compile source codes
