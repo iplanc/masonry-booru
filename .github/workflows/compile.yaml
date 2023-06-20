@@ -5,23 +5,23 @@ on:
 jobs:
   install_deps:
     name: install dependencys
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "20.x"
-      - run: npm i
+      - run: npm install
 
   compile_srcs:
     needs: install_deps
     name: compile source codes
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
       - name: install vue
-        run: npm i @vue/cli -g
+        run: npm install @vue/cli -g
       - name: fixes lint errors
         run: npm run lint
       - name: compile source codes
@@ -30,16 +30,8 @@ jobs:
   push_to_github:
     needs: [install_deps, compile_srcs]
     name: push to github
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: MBooru
-    container:
-      image: node:20.3
+    runs-on: windows-latest
     steps:
-      - name: install git
-        run: apt install git -y
       - name: config git
         run: git config --global user.name 'PlanC14' && git config --global user.email 'planc2333@outlook.com'
       - name: push to pages branch
